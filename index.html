@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UGM</title>
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+<style>
+body {
+    background-color: #000;
+    color: #ff0000;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+.modal-content {
+    background-color: #111;
+    color: #ff0000;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ff0000;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+.modal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+#notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: none;
+    z-index: 1000;
+    color: #fff;
+}
+.sidebar-link {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+    color: #ff0000;
+}
+.sidebar-link:hover,
+.sidebar-link.active {
+    color: #ffffff;
+}
+.item h2 {
+    color: #ff0000;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.6rem;
+}
+footer {
+    color: #ff0000;
+}
+.top-border {
+    height: 4px;
+    background-color: #ff0000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-border"></div>
+
+<header class="flex justify-between items-center p-4 shadow-md sticky top-0 bg-black z-40 border-b border-red-600" data-aos="fade-down">
+
+<a href="index.html" class="text-5xl font-bold text-red-600 tracking-wider">
+UGM
+</a>
+
+<nav class="flex items-center space-x-6 uppercase tracking-wider text-sm">
+
+<a href="index.html" class="text-red-500 hover:text-white transition">
+Shop
+</a>
+
+<a href="about2.html" class="text-red-500 hover:text-white transition">
+About
+</a>
+
+<a href="contact2.html" class="text-red-500 hover:text-white transition">
+Contact
+</a>
+
+<a href="cart2.html" class="relative text-red-500 text-2xl hover:text-white transition">
+<i class="fas fa-shopping-cart"></i>
+<span id="cartCount" class="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold rounded-full px-2 py-1">0</span>
+</a>
+
+</nav>
+
+</header>
+
+<div id="notification"></div>
+
+<main class="max-w-7xl mx-auto px-4 mt-8 md:flex md:space-x-16" data-aos="fade-up">
+
+<aside class="md:w-1/4 mb-10 md:mb-0">
+<nav class="text-left">
+<p class="sidebar-link active" data-filter="all">All</p>
+</nav>
+</aside>
+
+<section class="md:w-3/4">
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+<div class="item" data-category="tshirt" data-name="TS - 01" data-price="45000" data-image="tee-sai.png">
+<img src="tee-sai.png" class="w-64 mx-auto hover:scale-105 transition-transform duration-300">
+<h2 class="text-center mt-2">TS - 01</h2>
+</div>
+
+<div class="item" data-category="tshirt" data-name="TS - 02" data-price="45000" data-image="tee-zay.png">
+<img src="tee-zay.png" class="w-64 mx-auto hover:scale-105 transition-transform duration-300">
+<h2 class="text-center mt-2">TS - 02</h2>
+</div>
+
+<div class="item" data-category="tshirt" data-name="TS - 03" data-price="45000" data-image="tshirt12.png">
+<img src="tshirt12.png" class="w-64 mx-auto hover:scale-105 transition-transform duration-300">
+<h2 class="text-center mt-2">TS - 03</h2>
+</div>
+
+<div class="item" data-category="tshirt" data-name="PT - 01" data-price="65000" data-image="pants23.png">
+<img src="pants23.png" class="w-64 mx-auto hover:scale-105 transition-transform duration-300">
+<h2 class="text-center mt-2">PT - 01</h2>
+</div>
+
+<div class="item" data-category="tshirt" data-name="PT - 02" data-price="125000" data-image="pants24.png">
+<img src="pants24.png" class="w-64 mx-auto hover:scale-105 transition-transform duration-300">
+<h2 class="text-center mt-2">PT - 02</h2>
+</div>
+
+<div class="item" data-category="tshirt" data-name="PT - 03" data-price="125000" data-image="pants22.png">
+<img src="pants22.png" class="w-64 mx-auto hover:scale-105 transition-transform duration-300">
+<h2 class="text-center mt-2">PT - 03</h2>
+</div>
+
+
+<div class="item lg:col-start-2" data-category="tshirt" data-name="PT - 04" data-price="65000" data-image="pants25.png">
+<img src="pants25.png" class="w-64 mx-auto hover:scale-105 transition-transform duration-300">
+<h2 class="text-center mt-2">PT - 04</h2>
+</div>
+
+</div>
+</section>
+</main>
+
+<div id="modal" class="modal">
+<div class="modal-content">
+<span id="closeModal" class="close text-right text-xl cursor-pointer text-red-600">×</span>
+<h2 id="modalTitle" class="text-xl font-bold"></h2>
+<p id="modalPrice" class="text-lg"></p>
+<img id="modalImage" class="modal-image" alt="Product Image">
+<select id="modalSize" class="border border-red-600 bg-black text-red-500 p-2 rounded w-full mt-2">
+<option value="" disabled selected>Select Size</option>
+<option value="S">S</option>
+<option value="M">M</option>
+<option value="L">L</option>
+<option value="XL">XL</option>
+</select>
+
+<button id="addToCart" class="w-full bg-red-700 text-white py-2 rounded hover:bg-red-800 mt-3">
+Add to Cart
+</button>
+</div>
+</div>
+
+<footer class="bg-black text-center py-6 mt-10 border-t border-red-700">
+<p class="text-red-600">© 2025 UGM. All Rights Reserved.</p>
+<a href="https://www.instagram.com/unchmf/?hl=en" target="_blank" class="text-red-600 text-2xl">
+<i class="fab fa-instagram"></i>
+</a>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init({ duration: 800, once: true });
+
+/* ✅ FIXED: DO NOT RESET CART */
+if (!localStorage.getItem('ugmCart')) {
+    localStorage.setItem('ugmCart', JSON.stringify([]));
+}
+
+const items = document.querySelectorAll('.item');
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modalTitle');
+const modalPrice = document.getElementById('modalPrice');
+const modalImage = document.getElementById('modalImage');
+const addToCart = document.getElementById('addToCart');
+const modalSize = document.getElementById('modalSize');
+const notification = document.getElementById('notification');
+let selectedItem = {};
+
+function showNotification(message, color) {
+notification.textContent = message;
+notification.style.backgroundColor = color;
+notification.style.display = 'block';
+setTimeout(() => notification.style.display = 'none', 2000);
+}
+
+function updateCartCount() {
+const cart = JSON.parse(localStorage.getItem('ugmCart')) || [];
+document.getElementById('cartCount').textContent = cart.length;
+}
+
+items.forEach(item => {
+item.addEventListener('click', () => {
+selectedItem = {
+name: item.dataset.name,
+price: parseFloat(item.dataset.price),
+image: item.dataset.image
+};
+modalTitle.textContent = selectedItem.name;
+modalPrice.textContent = `Price: ₦${selectedItem.price.toLocaleString()}`;
+modalImage.src = selectedItem.image;
+modal.style.display = 'block';
+});
+});
+
+document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
+
+addToCart.onclick = () => {
+if (!modalSize.value) return alert('Please select a size');
+selectedItem.size = modalSize.value;
+let cart = JSON.parse(localStorage.getItem('ugmCart')) || [];
+cart.push(selectedItem);
+localStorage.setItem('ugmCart', JSON.stringify(cart));
+modal.style.display = 'none';
+updateCartCount();
+showNotification('Item added to cart', 'green');
+};
+
+window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
+
+const filterLinks = document.querySelectorAll('.sidebar-link');
+
+filterLinks.forEach(link => {
+link.addEventListener('click', () => {
+const filter = link.getAttribute('data-filter');
+
+filterLinks.forEach(l => l.classList.remove('active'));
+link.classList.add('active');
+
+items.forEach(item => {
+const category = item.getAttribute('data-category');
+if (filter === 'all' || category === filter) {
+item.style.display = 'block';
+} else {
+item.style.display = 'none';
+}
+});
+});
+});
+
+/* ✅ ENSURE COUNT SHOWS ON LOAD */
+updateCartCount();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About UGM</title>
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+<style>
+  body {
+    background-color: #000;
+    color: #ff0000;
+    font-family: system-ui, sans-serif;
+  }
+
+  .about-img {
+    border: 2px solid #ff0000;
+  }
+
+  .info-card {
+    background-color: #111;
+    border: 1px solid #ff0000;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="top-border"></div>
+
+<header class="flex justify-between items-center p-4 shadow-md sticky top-0 bg-black z-40 border-b border-red-600" data-aos="fade-down">
+
+<a href="index.html" class="text-5xl font-bold text-red-600 tracking-wider">
+UGM
+</a>
+
+<nav class="flex items-center space-x-6 uppercase tracking-wider text-sm">
+
+<a href="index.html" class="text-red-500 hover:text-white transition">
+Shop
+</a>
+
+<a href="about2.html" class="text-red-500 hover:text-white transition">
+About
+</a>
+
+<a href="contact2.html" class="text-red-500 hover:text-white transition">
+Contact
+</a>
+
+<a href="cart2.html" class="relative text-red-500 text-2xl hover:text-white transition">
+<i class="fas fa-shopping-cart"></i>
+<span id="cartCount" class="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold rounded-full px-2 py-1">0</span>
+</a>
+
+</nav>
+
+</header>
+
+<main class="max-w-5xl mx-auto px-4 py-14 space-y-16">
+
+<section class="text-center" data-aos="fade-up">
+<h1 class="text-5xl font-extrabold text-red-600 mb-4">About UGM</h1>
+<p class="text-red-400 max-w-2xl mx-auto leading-relaxed">
+Unchained wasn’t announced. It appeared—quiet, intentional, meant only for those tuned into the frequency.
+No noise, no rollout. Just a signal.
+</p>
+</section>
+
+<section class="grid md:grid-cols-2 gap-12 items-center">
+
+<div class="space-y-6 text-red-400" data-aos="fade-right">
+<h2 class="text-3xl font-bold text-red-600">Built for the Unchained</h2>
+
+<p>Everything we make sits between discipline and chaos.</p>
+<p>There's no big team. Just hands that design, build, break, re-make.</p>
+<p>We don't chase attention. We observe who finds us.</p>
+<p>Unchained is a code.</p>
+</div>
+
+<div class="flex justify-center" data-aos="fade-left">
+<div class="relative">
+<img src="tee-zay2.jpeg" class="about-img relative w-64 h-64 object-cover rounded-3xl shadow-xl">
+<p class="text-center">TENSKI SAVE ME!</p>
+</div>
+</div>
+
+</section>
+
+</main>
+
+<footer class="bg-black border-t border-red-600 mt-16">
+<div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+<p class="text-red-600 text-sm">© 2025 UGM. All Rights Reserved.</p>
+
+<a href="https://www.instagram.com/unchmf/?hl=en" target="_blank" class="text-red-600 text-2xl hover:text-white transition">
+<i class="fab fa-instagram"></i>
+</a>
+</div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ duration: 800, once: true });</script>
+
+</body>
+</html>

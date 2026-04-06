@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart - UGM</title>
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+
+<style>
+body{background:#000;color:#f00;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.top-border{height:4px;background:#f00}
+header,footer{background:#000;color:#f00;border-color:#f00}
+.cart-box{background:#111;border:1px solid #f00}
+input{background:#111;color:#f00;border:1px solid #f00}
+input::placeholder{color:#b30000}
+button{background:#f00}
+button:hover{background:#cc0000}
+a{color:#f00} a:hover{color:#fff}
+</style>
+
+<!-- Load Paystack early -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+
+<body>
+
+<div class="top-border"></div>
+
+<header class="flex justify-between items-center p-4 border-b border-red-700 shadow-lg sticky top-0 z-40">
+<a href="index.html" class="text-3xl text-red-600 font-bold hover:text-white transition">
+<i class="fas fa-arrow-left"></i>
+</a>
+<h1 class="text-4xl font-bold text-red-600">Your Cart</h1>
+<div class="w-6"></div>
+</header>
+
+<div class="max-w-4xl mx-auto mt-8 cart-box shadow-lg rounded-lg p-6">
+
+<div id="cartItems" class="space-y-6"></div>
+
+<hr class="my-6 border-red-600">
+
+<div class="text-right text-xl font-bold text-red-600">
+Total: ₦<span id="totalAmount">0</span>
+</div>
+
+<form id="checkoutForm" class="mt-6 space-y-4">
+<input type="text" name="name" placeholder="Full Name" required class="w-full p-3 rounded"/>
+<input type="email" name="email" placeholder="Email" required class="w-full p-3 rounded"/>
+<input type="tel" name="phone" placeholder="Phone Number" required class="w-full p-3 rounded"/>
+<input type="text" name="address" placeholder="Address" required class="w-full p-3 rounded"/>
+
+<button type="submit" class="text-black px-6 py-3 rounded w-full font-bold transition">
+Place & Pay
+</button>
+</form>
+
+</div>
+
+<footer class="text-center mt-10 py-6 border-t border-red-700 text-red-600">
+© 2025 UGM. All Rights Reserved.
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({duration:800,once:true});</script>
+
+<script>
+window.addEventListener("load", function(){
+
+const cartContainer = document.getElementById("cartItems");
+const totalAmountElement = document.getElementById("totalAmount");
+let cart = JSON.parse(localStorage.getItem("ugmCart")) || [];
+
+/* RENDER CART */
+function renderCart(){
+cartContainer.innerHTML="";
+let total=0;
+
+if(cart.length===0){
+cartContainer.innerHTML='<p class="text-center text-red-500 text-lg">Your cart is empty.</p>';
+totalAmountElement.textContent="0";
+return;
+}
+
+cart.forEach((item,index)=>{
+total+=item.price;
+
+const itemDiv=document.createElement("div");
+itemDiv.classList.add("flex","items-center","justify-between","pb-4","border-b","border-red-800");
+
+itemDiv.innerHTML=`
+<div class="flex items-center space-x-4">
+<img src="${item.image}" class="w-20 h-20 rounded-lg object-cover border border-red-600">
+<div>
+<h3 class="font-bold text-red-600">${item.name}</h3>
+<p class="text-sm text-red-400">Size: ${item.size}</p>
+<p class="font-bold text-red-500">₦${item.price.toLocaleString()}</p>
+</div>
+</div>
+<button class="text-red-600 hover:text-white" onclick="removeItem(${index})">
+<i class="fas fa-trash text-xl"></i>
+</button>
+`;
+
+cartContainer.appendChild(itemDiv);
+});
+
+totalAmountElement.textContent = total.toLocaleString();
+}
+
+/* REMOVE ITEM */
+window.removeItem = function(index){
+cart.splice(index,1);
+localStorage.setItem("ugmCart",JSON.stringify(cart));
+renderCart();
+};
+
+renderCart();
+
+/* CHECKOUT */
+document.getElementById("checkoutForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+if(cart.length===0){
+alert("Your cart is empty");
+return;
+}
+
+const name = this.name.value;
+const email = this.email.value;
+const phone = this.phone.value;
+const address = this.address.value;
+
+const total = cart.reduce((sum,item)=>sum+item.price,0);
+
+/* Paystack Payment */
+if(!window.PaystackPop){
+alert("Payment system failed to load. Disable adblock or try another browser.");
+return;
+}
+
+let handler = PaystackPop.setup({
+key: "pk_live_ac04b87ed038cc87c5a7d010e06377d0eaff404e",
+email: email,
+amount: total * 100,
+currency: "NGN",
+metadata: {
+custom_fields: [
+{ display_name: "Customer Name", value: name },
+{ display_name: "Phone", value: phone },
+{ display_name: "Address", value: address }
+]
+},
+callback: function(response){
+localStorage.removeItem("ugmCart");
+window.location.href = "success2.html";
+},
+onClose: function(){
+alert("Transaction cancelled");
+}
+});
+
+handler.openIframe();
+
+});
+});
+</script>
+
+</body>
+</html>
